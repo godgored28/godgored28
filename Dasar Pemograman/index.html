@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wisata Sungai Penuh</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Tempat Wisata Hits Sungai Penuh</h1>
+    <p>Temukan Keindahan Alam Di Kota Sakti Sungai Penuh, Sekepal Tanah Surga</p>
+    <nav>
+      <ul>
+        <li><a href="#slider">Gambar</a></li>
+        <li><a href="#gunungkerinci">Gunung Kerinci</a></li>
+        <li><a href="#mesjidagung">Mesjid Agung</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#filter">Filter</a></li>
+        <li><a href="#komentar">Komentar</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- SLIDER -->
+    <section id="slider" class="slider">
+      <div class="slides" id="slides">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Uprising-mount_kerinci.jpg" alt="Gunung Kerinci">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Pondok_Tinggi_Great_Mosque.jpg" alt="Mesjid Agung">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Lake_Kaco.jpg" alt="Danau Kaco">
+      </div>
+      <div class="slider-buttons">
+        <button onclick="prevSlide()">&#10094;</button>
+        <button onclick="nextSlide()">&#10095;</button>
+      </div>
+    </section>
+
+    <!-- FILTER -->
+    <section id="filter">
+      <h2>Filter Lokasi Wisata</h2>
+      <select onchange="filterWisata(this.value)">
+        <option value="all">Semua</option>
+        <option value="gunungkerinci">Gunung Kerinci</option>
+        <option value="mesjidagung">Mesjid Agung</option>
+      </select>
+    </section>
+
+    <!-- DESTINASI -->
+    <article id="destinasi">
+      <div id="gunungkerinci">
+        <h2>Gunung Kerinci</h2>
+        <p>Gunung tertinggi di Sumatera dan gunung berapi tertinggi di Indonesia (3.805 mdpl), terletak di perbatasan Kabupaten Kerinci dan Solok Selatan.</p>
+      </div>
+      <div id="mesjidagung">
+        <h2>Mesjid Agung Pondok Tinggi</h2>
+        <p>Didirikan tahun 1874, mesjid bersejarah ini menjadi ikon religi dan budaya kota Sungai Penuh.</p>
+      </div>
+    </article>
+
+    <!-- VIDEO -->
+    <section id="video">
+      <h2>Video Wisata</h2>
+      <iframe width="100%" height="315" src="https://www.youtube.com/embed/0GBi9NOmo2A" frameborder="0" allowfullscreen></iframe>
+    </section>
+
+    <!-- GALERI -->
+    <section id="galeri" class="galeri">
+      <h2>Galeri Wisata</h2>
+      <div class="galeri-grid">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/61/Telun_Berasap_Waterfall.jpg" alt="Air Terjun Telun Berasap">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Danau_Gunung_Tujuh.jpg" alt="Danau Gunung Tujuh">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Danau_Kaco.jpg" alt="Danau Kaco">
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog" class="blog">
+      <h2>Blog Wisata</h2>
+      <article>
+        <h3>Menaklukkan Gunung Kerinci</h3>
+        <p>Pendakian Gunung Kerinci memberikan pengalaman luar biasa. Suasana hutan hujan tropis, satwa liar, dan pemandangan kawah dari puncak sungguh memukau.</p>
+      </article>
+      <article>
+        <h3>Melihat Sejarah di Mesjid Agung</h3>
+        <p>Mesjid Agung Pondok Tinggi bukan hanya tempat ibadah, tetapi saksi sejarah perjuangan dan budaya masyarakat Sungai Penuh.</p>
+      </article>
+    </section>
+
+    <!-- KOMENTAR -->
+    <section id="komentar" class="comments">
+      <h2>Tambahkan Komentar</h2>
+      <textarea id="commentInput" rows="4" placeholder="Tulis komentarmu di sini..."></textarea><br>
+      <button onclick="addComment()">Kirim</button>
+      <div class="comment-list" id="commentList">
+        <h3>Komentar:</h3>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section id="kontak">
+      <h2>Kontak Kami</h2>
+      <form onsubmit="sendMessage(event)">
+        <input type="text" id="name" placeholder="Nama" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <textarea id="message" placeholder="Pesan" required></textarea><br>
+        <button type="submit">Kirim Pesan</button>
+      </form>
+      <div id="formStatus"></div>
+    </section>
+
+    <!-- PENULIS -->
+    <aside>
+      <h3>Tentang Penulis</h3>
+      <p>Nama: M. Firmansyah</p>
+      <p>TTL: Permanti, 28 Juni 2000</p>
+      <p>Kota: Sungai Penuh, Jambi</p>
+      <p>Alamat: Jl. Depati Parbo</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025, Muhammad Firmansyah | Dasar Pemrograman Web</p>
+  </footer>
+
+  <script>
+    // SLIDER
+    let slideIndex = 0;
+    const slides = document.getElementById('slides');
+
+    function showSlide(index) {
+      const slideWidth = slides.children[0].clientWidth;
+      slides.style.transform = `translateX(-${index * slideWidth}px)`;
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.children.length;
+      showSlide(slideIndex);
+    }
+
+    function prevSlide() {
+      slideIndex = (slideIndex - 1 + slides.children.length) % slides.children.length;
+      showSlide(slideIndex);
+    }
+
+    setInterval(nextSlide, 4000);
+
+    // KOMENTAR
+    function addComment() {
+      const input = document.getElementById('commentInput');
+      const list = document.getElementById('commentList');
+      if (input.value.trim() !== '') {
+        const p = document.createElement('p');
+        p.textContent = input.value;
+        list.appendChild(p);
+        saveComment(input.value);
+        input.value = '';
+      }
+    }
+
+    function saveComment(text) {
+      let comments = JSON.parse(localStorage.getItem('comments') || '[]');
+      comments.push(text);
+      localStorage.setItem('comments', JSON.stringify(comments));
+    }
+
+    function loadComments() {
+      let comments = JSON.parse(localStorage.getItem('comments') || '[]');
+      const list = document.getElementById('commentList');
+      comments.forEach(c => {
+        const p = document.createElement('p');
+        p.textContent = c;
+        list.appendChild(p);
+      });
+    }
+
+    // KONTAK
+    function sendMessage(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      document.getElementById('formStatus').textContent = `Terima kasih, ${name}. Pesanmu telah kami terima.`;
+    }
+
+    // FILTER
+    function filterWisata(id) {
+      const sections = document.querySelectorAll('#destinasi > div');
+      sections.forEach(sec => {
+        if (id === 'all' || sec.id === id) {
+          sec.style.display = 'block';
+        } else {
+          sec.style.display = 'none';
+        }
+      });
+    }
+
+    window.onload = () => {
+      loadComments();
+      filterWisata('all');
+    }
+  </script>
+
+</body>
+</html>
+
